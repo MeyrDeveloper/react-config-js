@@ -1,7 +1,11 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { connect } from 'react-redux'
+import styles from '../styles/Home.module.scss'
+import {tick} from 'src/modules/main/actions'
+import { useEffect } from 'react'
 
-export default function Home() {
+function Home({some, tick}) {
+  useEffect(() => tick(), [])
   return (
     <div className={styles.container}>
       <Head>
@@ -63,3 +67,6 @@ export default function Home() {
     </div>
   )
 }
+
+
+export default connect(state => ({some: state.main.main}), {tick})(Home)
